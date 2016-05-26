@@ -5495,7 +5495,10 @@ nv.models.legend = function() {
         ;
 
     function chart(selection) {
-        selection.each(function(data) {
+        selection.each(function(unfilteredData) {
+            var data = unfilteredData.filter(function(dataset) {
+              return dataset.renderLegend !== false;
+            });
             var availableWidth = width - margin.left - margin.right,
                 container = d3.select(this);
             nv.utils.initSVG(container);
